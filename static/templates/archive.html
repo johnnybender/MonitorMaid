@@ -1,0 +1,33 @@
+<script>
+
+$.ajax({
+        url: url,
+        type: "GET",
+        dataType: "json",
+        headers: {
+            "Authorization": "Bearer " + accessToken
+        },
+    }).done(function(pt){
+        var name = pt.name[0].given.join(" ") +" "+ pt.name[0].family.join(" ");
+        document.body.innerHTML += "<h3>Patient: " + name + "</h3>";
+        document.body.innerHTML += "<h3>State: " + state + "</h3>";
+        document.body.innerHTML += "<h3>Code: " + code + "</h3>";
+        document.body.innerHTML += "<h3>tokenUri: " + tokenUri + "</h3>";
+        document.body.innerHTML += "<h3>clientId: " + clientId + "</h3>";
+        document.body.innerHTML += "<h3>secret: " + secret + "</h3>";
+        document.body.innerHTML += "<h3>serviceUri: " + serviceUri + "</h3>";
+        document.body.innerHTML += "<h3>redirectUri: " + redirectUri + "</h3>";
+        document.body.innerHTML += "<h3>data.code: " + data.code + "</h3>";
+        document.body.innerHTML += "<h3>data.grant_type: " + data.grant_type + "</h3>";
+        document.body.innerHTML += "<h3>data.redirect_uri: " + data.redirect_uri + "</h3>";
+        document.body.innerHTML += "<h3>options.url: " + options.url + "</h3>";
+        document.body.innerHTML += "<h3>options.type: " + options.type + "</h3>";
+        document.body.innerHTML += "<h3>res: " + res + "</h3>";
+        document.body.innerHTML += "<h3>accessToken: " + accessToken + "</h3>";
+        document.body.innerHTML += "<h3>patientId: " + patientId + "</h3>";
+        document.body.innerHTML += "<h3>url: " + url + "</h3>";
+        document.body.innerHTML += "<h3>tokenpost: " + tokenurlpost + "</h3>";
+    });
+});
+
+</script>

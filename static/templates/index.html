@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <title>MonitorMaid</title>
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  </head>
+  <body>
+    <script>
+        var state = getUrlParameter("state");
+        var code = getUrlParameter("code");
+        var params = JSON.parse(sessionStorage[state]);
+        var tokenUri = params.tokenUri;
+        var clientId = params.clientId;
+        var secret = params.secret;
+        var serviceUri = params.serviceUri;
+        var redirectUri = params.redirectUri;
+        var data = {
+            code: code,
+            grant_type: 'authorization_code',
+            redirect_uri: redirectUri
+        };
+        var options;
+        if (!secret) {
+            data['client_id'] = clientId;
+        }
+        options = {
+            url: tokenUri,
+            type: 'POST',
+            data: data
+        };
+        
+        $.ajax(options).done(function(res){
+            var accessToken = res.access_token;
+            var patientId = res.patient;
+            var url = serviceUri + "/Patient/" + patientId;
+            var tokenurlpost = redirectUri.replace("index","token");
+            $.ajax({
+                url: tokenurlpost,
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "accessToken": accessToken,
+                    "serviceUri": serviceUri,
+                    "patientId": patientId
+                    }),
+                success: function(response) {
+                    window.location = redirectUri.replace("index/","/");
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+        function getUrlParameter(sParam)
+        {
+            var sPageURL = window.location.search.substring(1);
+            var sURLVariables = sPageURL.split('&');
+            for (var i = 0; i < sURLVariables.length; i++) 
+            {
+                var sParameterName = sURLVariables[i].split('=');
+                if (sParameterName[0] == sParam) {
+                    var res = sParameterName[1].replace(/\+/g, '%20');
+                    return decodeURIComponent(res);
+                }
+            }
+        }
+    </script>
+  </body>
+</html>
