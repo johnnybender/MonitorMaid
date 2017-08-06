@@ -14,8 +14,16 @@ const config = {
             test: /\.jsx?/,
             exclude: /node_modules/,
             use: 'babel-loader'
+        },
+        {
+            test: /\.svg$/,
+            use: 'raw-loader'
+        },
+        {
+            test: /\.css$/,
+            use: 'css-loader'
         }
-      ]
+      ],
     },
 };
 module.exports = config;
