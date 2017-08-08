@@ -1,0 +1,1 @@
+{"id": "2ba33423-f039-43da-a44e-2171b44a65ea", "link": [{"relation": "self", "url": "https://sb-fhir-dstu2.smarthealthit.org/smartdstu2/data/Observation?code=http%3A%2F%2Floinc.org%7C55284-4&patient=f6e2aba6-13a1-42ab-b97b-c64ceeade069"}], "meta": {"lastUpdated": "2017-08-08T04:27:52.556+00:00"}, "resourceType": "Bundle", "total": 0, "type": "searchset"}
